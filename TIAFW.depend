@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1415988428 source:/home/alexcch/Escritorio/repo/TIAFW/TIAFW/main.cpp
+	<cstdio>
+	<cmath>
+	<iostream>
+	<GL/glut.h>
+	"TextureManager.h"
+	"car.h"
+
+1415988428 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/TextureManager.h
+	<GL/glut.h>
+	<FreeImage.h>
+	<map>
+
+1416956376 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/car.h
+	<map>
+	<cmath>
+	<cstdio>
+	"background.h"
+	"TextureManager.h"
+
+1415988428 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/background.h
+	"TextureManager.h"
+	<iostream>
+	<string>
+	<fstream>
+
+1415988428 source:/home/alexcch/Escritorio/repo/TIAFW/TIAFW/TextureManager.cpp
+	"TextureManager.h"
+
