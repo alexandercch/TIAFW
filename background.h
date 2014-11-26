@@ -11,14 +11,17 @@ GLint background_texture, way_texture;
 const int msize=100;
 
 class CBackground{
-    public:
+public:
     CBackground();
     void draw();
     void draw_grass();
     void draw_way(int x, int y);
+    int rows, cols;
     int matrix[msize][msize];
 };
 CBackground::CBackground(){
+    rows = msize;
+    cols = msize;
     ifstream in("pista.txt");
     string line;
     int r=0;
@@ -32,7 +35,7 @@ CBackground::CBackground(){
         for(int j=0; j< msize; ++j)
             cout<<matrix[i][j];
         cout<<endl;
-    }*/       
+    }*/
 }
 void CBackground::draw_grass(){
     glBindTexture(GL_TEXTURE_2D, background_texture);
@@ -76,7 +79,7 @@ void CBackground::draw(){
     for(int i=0; i< msize; ++i){
         for(int j=0; j< msize; ++j){
             if (matrix[i][j]) continue;
-            draw_way(j, i);            
+            draw_way(j, i);
         }
     }
 }
