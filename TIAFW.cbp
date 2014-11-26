@@ -35,11 +35,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="./Graphics.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="TextureManager.cpp" />
 		<Unit filename="TextureManager.h" />
 		<Unit filename="background.h" />
+		<Unit filename="bfs.h" />
 		<Unit filename="car.h" />
+		<Unit filename="cqlearning.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="types.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -1,25 +1,18 @@
 #ifndef CAR_H
 #define CAR_H
 
-#include <map>
+
 #include <cmath>
 #include <cstdio>
 
 #include "background.h"
 #include "TextureManager.h"
+#include "types.h"
 
 using namespace std;
 
-typedef pair<float, float> dVector;//direction vector
-typedef pair<float, float> Point;//direction vector
-
-#define X first
-#define Y second
-
-#define PI 3.14159265f
-#define MAX_ANGLE 360
-
 GLint car_texture;
+
 CBackground *p_bg;
 
 class CCar{

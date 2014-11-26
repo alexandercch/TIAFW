@@ -133,7 +133,7 @@ int main(){
 			state = nextstate;
 			if (r[state.R][state.C]<0) {
 			    i--;
-			    break;
+			    continue;
 		    }
 			
 		}

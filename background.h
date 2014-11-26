@@ -7,29 +7,36 @@
 #include <fstream>
 
 using namespace std;
+
 GLint background_texture, way_texture;
-const int msize=100;
 
 class CBackground{
 public:
-    CBackground();
+    CBackground(int _rows, int _cols, string filename);
     void draw();
     void draw_grass();
     void draw_way(int x, int y);
     int rows, cols;
-    int matrix[msize][msize];
+    int **matrix;
+    string roadfile;
 };
-CBackground::CBackground(){
-    rows = msize;
-    cols = msize;
-    ifstream in("pista.txt");
+CBackground::CBackground(int _rows, int _cols, string filename):
+    rows(_rows), cols(_cols), roadfile(filename)
+{
+    cout<<":9"<<endl;
+    matrix= new int*[rows];
+    for(int i=0; i< rows; ++i)
+         matrix[i]= new int[cols];
+    ifstream in(roadfile.c_str());
     string line;
     int r=0;
     while(in>>line){
-        for(int i=0; i< msize; ++i)
-            matrix[msize - r - 1][i]=(int)(line[i]=='1');
+
+        for(int i=0; i< cols; ++i)
+            matrix[rows - r - 1][i]=(int)(line[i]=='1');
         r++;
     }
+    cout<<":9"<<endl;
     /*cout<<"matrix:"<<endl;
     for(int i=0; i< msize; ++i){
         for(int j=0; j< msize; ++j)
@@ -76,8 +83,8 @@ void CBackground::draw_way(int x, int y){
 void CBackground::draw(){
     glLoadIdentity();
     draw_grass();
-    for(int i=0; i< msize; ++i){
-        for(int j=0; j< msize; ++j){
+    for(int i=0; i< rows; ++i){
+        for(int j=0; j<cols; ++j){
             if (matrix[i][j]) continue;
             draw_way(j, i);
         }
