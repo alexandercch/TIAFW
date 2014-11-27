@@ -15,23 +15,38 @@ GLint car_texture;
 
 CBackground *p_bg;
 
+#define CAR_MOVES 3
+#define ANGLE_STEP 3
+
 class CCar{
 public:
-    float x, y;
-    float velocity;
+    double x, y;
+    double velocity;
     int angle;
-    CCar(float _x, float _y, float _angle, float _velocity);
+    CCar(double _x, double _y, double _angle, double _velocity);
+    bool is_in_road();
     void draw();
     void draw_car();
     void move_forward();
     void move_backward();
-    void move_left();
     void move_right();
-private:
-    int width, large;
-    float lx, ly;
+    void move_left();
+    //fake functions just to help qlearning algorithm
+    //choose wich action is the best without moving
+    //the actual car
+    void move_forward_action();
+    void move_right_action();
+    void move_left_action();
+    double x_action, y_action;
+    int angle_action;
+    void calculate_perimeter();
+//private:
+    double width, large;
+    double lx, ly;
     int langle;
     Point p1, p2, p3, p4, pcentral;
+    int n_moves;
+
 };
 
 inline double degrees_to_radians(double angle){return angle * PI/180.0f;}
@@ -44,7 +59,7 @@ inline Point rotate_point(Point p, double angle){
     return p_;
 }
 
-CCar::CCar(float _x=0, float _y=0, float _angle=90.0, float _velocity=0.0):x(_x), y(_y), angle(_angle), velocity(_velocity){
+CCar::CCar(double _x=0, double _y=0, double _angle=90.0, double _velocity=0.0):x(_x), y(_y), angle(_angle), velocity(_velocity), n_moves(CAR_MOVES){
     width=9; large=16;
     pcentral=Point(x, y);
 };
@@ -71,6 +86,7 @@ void CCar::draw_car(){
     glPointSize(4.0);
     glRotatef(-(angle-90.0), 0, 0, 1);
     glTranslatef(-x, -y, 0);
+    calculate_perimeter();
     glBegin(GL_POINTS);
         glVertex3d(p1.X, p1.Y, 11);
         glVertex3d(p2.X, p2.Y, 11);
@@ -82,7 +98,7 @@ void CCar::draw(){
     glTranslatef(x, y, 0);
     glRotatef(angle-90.0, 0, 0, 1);
     draw_car();
-    if (x!=lx || y!=ly || angle != langle){
+    /*if (x!=lx || y!=ly || angle != langle){
         lx=x; ly=y; langle=angle;
         printf("x y º: %4.3f %4.3f %4.0d\n", x, y, angle);
         p1 = rotate_point(Point(-width/2.0, 0.0), angle-90.0);
@@ -92,19 +108,39 @@ void CCar::draw(){
         p3 = rotate_point(Point(width/2.0, large), angle-90.0);
         p3.X+=x;p3.Y+=y;
         p4 = rotate_point(Point(width/2.0, 0), angle-90.0);
-        p4.X+=x;p4.Y+=y;
+        p4.X+=x;p4.Y+=y;*/
 
         /*cout<<"p1:"<<p1.X<<" "<<p1.Y<<endl;
         cout<<"p2:"<<p2.X<<" "<<p2.Y<<endl;
         cout<<"p3:"<<p3.X<<" "<<p3.Y<<endl;
         cout<<"p4:"<<p4.X<<" "<<p4.Y<<endl;*/
         //if (p_bg->matrix[p1.Y][p1.X])
-        cout<<"p1"<<p_bg->matrix[(int)p1.Y][(int)p1.X]<<endl;
+        /*cout<<"p1"<<p_bg->matrix[(int)p1.Y][(int)p1.X]<<endl;
         cout<<"p2"<<p_bg->matrix[(int)p2.Y][(int)p2.X]<<endl;
         cout<<"p3"<<p_bg->matrix[(int)p3.Y][(int)p3.X]<<endl;
         cout<<"p4"<<p_bg->matrix[(int)p4.Y][(int)p4.X]<<endl;
 
-    }
+    }*/
+}
+void CCar::calculate_perimeter(){
+    p1 = rotate_point(Point(-width/2.0, 0.0), angle-90.0);
+    p1.X+=x;p1.Y+=y;
+    p2 = rotate_point(Point(-width/2.0, large), angle-90.0);
+    p2.X+=x;p2.Y+=y;
+    p3 = rotate_point(Point(width/2.0, large), angle-90.0);
+    p3.X+=x;p3.Y+=y;
+    p4 = rotate_point(Point(width/2.0, 0), angle-90.0);
+    p4.X+=x;p4.Y+=y;
+    pcentral.X= (p1.X + p2.X + p3.X + p4.X)/4.0;
+    pcentral.Y= (p1.Y + p2.Y + p3.Y + p4.Y)/4.0;
+}
+
+bool CCar::is_in_road(){
+    calculate_perimeter();
+    return !(p_bg->matrix[(int)p1.Y][(int)p1.X] ||
+            p_bg->matrix[(int)p2.Y][(int)p2.X] ||
+            p_bg->matrix[(int)p3.Y][(int)p3.X] ||
+            p_bg->matrix[(int)p4.Y][(int)p4.X]);
 }
 void CCar::move_forward(){
     //cout<<sin((90.0f * PI)/180.0f)<<" "<<cos((90.0f * PI)/180.0f)<<endl;
@@ -118,14 +154,37 @@ void CCar::move_backward(){
     y-= sin(degrees_to_radians(angle));
 }
 void CCar::move_left(){
+    angle += ANGLE_STEP;
     move_forward();
-    angle+=3.0;
+
     if (angle>=MAX_ANGLE) angle-=MAX_ANGLE;
 }
 void CCar::move_right(){
+    angle -= ANGLE_STEP;
     move_forward();
-    angle-=3.0;
+
     if (angle<0) angle+=360;
 }
+
+void CCar::move_forward_action(){
+    angle_action = angle;
+    x_action = x + cos(degrees_to_radians(angle_action));
+    y_action = y + sin(degrees_to_radians(angle_action));
+}
+void CCar::move_right_action(){
+    angle_action= angle - ANGLE_STEP;
+    if (angle_action < 0) angle_action += 360;
+    x_action = x + cos(degrees_to_radians(angle_action));
+    y_action = y + sin(degrees_to_radians(angle_action));
+}
+void CCar::move_left_action(){
+    angle_action = angle + ANGLE_STEP;
+    if (angle_action >= MAX_ANGLE) angle_action -= MAX_ANGLE;
+
+    x_action = x + cos(degrees_to_radians(angle_action));
+    y_action = y + sin(degrees_to_radians(angle_action));
+
+}
+
 
 #endif

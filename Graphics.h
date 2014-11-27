@@ -13,7 +13,9 @@ CCar *glcar;
 CBackground *glbg;
 
 GLvoid window_display() {
+    //cout<<"draw"<<endl;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
     // follow hero
     glMatrixMode(GL_PROJECTION);
@@ -27,6 +29,7 @@ GLvoid window_display() {
     glutSwapBuffers();
 
     glFlush();
+
 }
 
 GLvoid window_reshape(GLsizei width, GLsizei height) {

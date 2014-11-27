@@ -1,3 +1,4 @@
+#include <thread>
 #include <cstdio>
 #include <cmath>
 #include <iostream>
@@ -21,11 +22,10 @@ CQLearning q;
 int main(int argc, char **argv) {
     p_bg = &bg; glcar = &car; glbg = &bg;
     q.set_r_matrix(bg.matrix, bg.rows, bg.cols);
-    q.train(&car);
-
-
-
-
-    GLmain();
+    thread  t1([](){q.train(&car);}),
+            t2([](){GLmain();});
+    t1.join();
+    t2.join();
+    //GLmain();
     return 1;
 }

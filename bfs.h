@@ -77,7 +77,7 @@ void BFS::prepare(){
 			for(int k=0; k< nsteps; ++k){
 				point p(i+rs[k], j+cs[k]);
 				if(is_in(p) && matrix[p.R][p.C]!=matrix[i][j]){//border
-					cout<<"border:"<<i<<" "<<j<<endl;
+					//cout<<"border:"<<i<<" "<<j<<endl;
 					q.push(point(i, j));
 					dist[i][j]=0;
 					vis[i][j]=1;
@@ -112,7 +112,5 @@ void BFS::B1(){
 	}
 	print_to_matrix();
 }
-
-
 
 #endif // BFS_H

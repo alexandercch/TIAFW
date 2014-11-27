@@ -28,7 +28,8 @@
 1415988428 source:/home/alexcch/Escritorio/repo/TIAFW/TIAFW/TextureManager.cpp
 	"TextureManager.h"
 
-1417033992 source:/home/alex/Desktop/tia/TIAFW/main.cpp
+1417114136 source:/home/alex/Desktop/tia/TIAFW/main.cpp
+	<thread>
 	<cstdio>
 	<cmath>
 	<iostream>
@@ -42,7 +43,7 @@
 	<FreeImage.h>
 	<map>
 
-1417027165 /home/alex/Desktop/tia/TIAFW/car.h
+1417119720 /home/alex/Desktop/tia/TIAFW/car.h
 	<cmath>
 	<cstdio>
 	"background.h"
@@ -55,13 +56,13 @@
 	<string>
 	<fstream>
 
-1417031100 /home/alex/Desktop/tia/TIAFW/types.h
+1417113967 /home/alex/Desktop/tia/TIAFW/types.h
 	<map>
 
 1413252735 source:/home/alex/Desktop/tia/TIAFW/TextureManager.cpp
 	"TextureManager.h"
 
-1417034600 /home/alex/Desktop/tia/TIAFW/cqlearning.h
+1417120099 /home/alex/Desktop/tia/TIAFW/cqlearning.h
 	<cstdio>
 	<fstream>
 	<string>
@@ -70,12 +71,12 @@
 	"bfs.h"
 	"car.h"
 
-1417034453 /home/alex/Desktop/tia/TIAFW/bfs.h
+1417119810 /home/alex/Desktop/tia/TIAFW/bfs.h
 	<algorithm>
 	<queue>
 	"types.h"
 
-1417027132 /home/alex/Desktop/tia/TIAFW/Graphics.h
+1417113380 /home/alex/Desktop/tia/TIAFW/Graphics.h
 	<GL/glut.h>
 	"TextureManager.h"
 	"background.h"
