@@ -31,6 +31,9 @@ public:
     void move_backward();
     void move_right();
     void move_left();
+
+    void set_fin(Coord _fin);
+
     //fake functions just to help qlearning algorithm
     //choose wich action is the best without moving
     //the actual car
@@ -40,14 +43,27 @@ public:
     double x_action, y_action;
     int angle_action;
     void calculate_perimeter();
+    bool end_reached();
+    void drive_from_q(double ****q);
 //private:
     double width, large;
     double lx, ly;
     int langle;
     Point p1, p2, p3, p4, pcentral;
+    Coord fin;
+
     int n_moves;
 
 };
+
+
+void CCar::set_fin(Coord _fin){
+    fin = _fin;
+}
+
+bool CCar::end_reached(){
+    return fin.X== x && fin.Y==y;
+}
 
 inline double degrees_to_radians(double angle){return angle * PI/180.0f;}
 inline double d2g(double angle){ return degrees_to_radians(angle);}
@@ -63,6 +79,16 @@ CCar::CCar(double _x=0, double _y=0, double _angle=90.0, double _velocity=0.0):x
     width=9; large=16;
     pcentral=Point(x, y);
 };
+
+void CCar::drive_from_q(double ****q){
+    while(x< 80){
+
+
+    }
+
+
+}
+
 void CCar::draw_car(){
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//funcion de transparencia
     glEnable(GL_BLEND);//utilizar transparencia
@@ -143,11 +169,12 @@ bool CCar::is_in_road(){
             p_bg->matrix[(int)p4.Y][(int)p4.X]);
 }
 void CCar::move_forward(){
+
     //cout<<sin((90.0f * PI)/180.0f)<<" "<<cos((90.0f * PI)/180.0f)<<endl;
     //cout<<x<<" "<<y<<" "<<angle<<":"<<endl;
     x+= cos(degrees_to_radians(angle));
     y+= sin(degrees_to_radians(angle));
-
+    calculate_perimeter();
 }
 void CCar::move_backward(){
     x-= cos(degrees_to_radians(angle));

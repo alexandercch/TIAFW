@@ -1,25 +1,27 @@
 # depslib dependency file v1.0
-1415988428 source:/home/alexcch/Escritorio/repo/TIAFW/TIAFW/main.cpp
+1417470955 source:/home/alexcch/Escritorio/repo/TIAFW/TIAFW/main.cpp
+	<thread>
 	<cstdio>
 	<cmath>
 	<iostream>
-	<GL/glut.h>
-	"TextureManager.h"
+	"background.h"
 	"car.h"
+	"cqlearning.h"
+	"Graphics.h"
 
 1415988428 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/TextureManager.h
 	<GL/glut.h>
 	<FreeImage.h>
 	<map>
 
-1416956376 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/car.h
-	<map>
+1417470612 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/car.h
 	<cmath>
 	<cstdio>
 	"background.h"
 	"TextureManager.h"
+	"types.h"
 
-1415988428 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/background.h
+1417197465 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/background.h
 	"TextureManager.h"
 	<iostream>
 	<string>
@@ -77,6 +79,30 @@
 	"types.h"
 
 1417113380 /home/alex/Desktop/tia/TIAFW/Graphics.h
+	<GL/glut.h>
+	"TextureManager.h"
+	"background.h"
+	"car.h"
+
+1417197465 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/types.h
+	<map>
+
+1417471011 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/cqlearning.h
+	<unistd.h>
+	<cstdio>
+	<fstream>
+	<string>
+	"background.h"
+	"types.h"
+	"bfs.h"
+	"car.h"
+
+1417463726 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/bfs.h
+	<algorithm>
+	<queue>
+	"types.h"
+
+1417469122 /home/alexcch/Escritorio/repo/TIAFW/TIAFW/Graphics.h
 	<GL/glut.h>
 	"TextureManager.h"
 	"background.h"

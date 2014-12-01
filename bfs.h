@@ -33,7 +33,7 @@ class BFS
         int max_dist;
 };
 
-int nsteps = 8;//4;
+int nsteps = 8;
 int rs[]={-1, -1, -1, 0, 1, 1, 1, 0}, cs[]={-1, 0, 1, 1, 1, 0, -1, -1};
 //int rs[]={0, 0, 1, -1}, cs[]={1, -1, 0, 0};
 
@@ -60,7 +60,7 @@ void BFS::print_to_matrix(){
 			if (matrix[i][j]==IN)
 				output[i][j]= f(dist[i][j], max_dist);
 			else
-				output[i][j]=-1;
+				output[i][j]=-1000;
 	}
 }
 

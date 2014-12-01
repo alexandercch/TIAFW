@@ -113,7 +113,7 @@ void GLmain(){
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(700 , 700);
-    glutInitWindowPosition(300, 0);
+    glutInitWindowPosition(500, 0);
     glutCreateWindow("TIA - Final :9");
     initGL();
     glutDisplayFunc(&window_display);
