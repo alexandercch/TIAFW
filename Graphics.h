@@ -11,6 +11,7 @@
 
 CCar *glcar;
 CBackground *glbg;
+int glrows, glcols;
 
 GLvoid window_display() {
     //cout<<"draw"<<endl;
@@ -20,7 +21,9 @@ GLvoid window_display() {
     // follow hero
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, 100, 0, 100, -100, 100);
+    //glOrtho(0, 100, 0, 100, -100, 100);
+    glOrtho(0, glcols, 0, glrows, -100, 100);
+
 
     glMatrixMode(GL_MODELVIEW);
     glbg->draw();
@@ -37,7 +40,9 @@ GLvoid window_reshape(GLsizei width, GLsizei height) {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, 100, 0, 100, -100, 100);
+    //glOrtho(0, 100, 0, 100, -100, 100);
+    glOrtho(0, glcols, 0, glrows, -100, 100);
+
 
     glMatrixMode(GL_MODELVIEW);
 }
@@ -112,7 +117,7 @@ void GLmain(){
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(700 , 700);
+    glutInitWindowSize((glcols*700)/glrows , 700);
     glutInitWindowPosition(500, 0);
     glutCreateWindow("TIA - Final :9");
     initGL();
@@ -120,7 +125,8 @@ void GLmain(){
     glutReshapeFunc(&window_reshape);
     glutKeyboardFunc(&keyboard_key);
     glutSpecialFunc(&special_key);
-    glOrtho(0, 100, 0, 100, -100, 100);
+
+    glOrtho(0, glcols, 0, glrows, -100, 100);
     //function called on each frame
     glutIdleFunc(&window_idle);
 

@@ -52,13 +52,13 @@ void CBackground::draw_grass(){
         glVertex3d(0, 0, -10);
 
         glTexCoord2f(0.0f, 1.0f);
-        glVertex3d(0, 100, -10);
+        glVertex3d(0, rows, -10);
 
         glTexCoord2f(1.0f, 1.0f);
-        glVertex3d(100, 100, -10);
+        glVertex3d(cols, rows, -10);
 
         glTexCoord2f(1.0f, 0.0f);
-        glVertex3d(100, 0, -10);
+        glVertex3d(cols, 0, -10);
 
     glEnd();
 }

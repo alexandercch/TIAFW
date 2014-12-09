@@ -62,7 +62,8 @@ void CCar::set_fin(Coord _fin){
 }
 
 bool CCar::end_reached(){
-    return fin.X== x && fin.Y==y;
+    int dist=abs(fin.X-x) + abs(fin.Y-y);
+    return dist<15;
 }
 
 inline double degrees_to_radians(double angle){return angle * PI/180.0f;}
@@ -81,12 +82,6 @@ CCar::CCar(double _x=0, double _y=0, double _angle=90.0, double _velocity=0.0):x
 };
 
 void CCar::drive_from_q(double ****q){
-    while(x< 80){
-
-
-    }
-
-
 }
 
 void CCar::draw_car(){

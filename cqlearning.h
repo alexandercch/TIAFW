@@ -172,8 +172,8 @@ void CQLearning::train(CCar *car)
             //p_state(next_state);
             //usleep(10000);
             //cin.get();
-            //if (car->end_reached()){
-            if (car->x>80)
+            if (car->end_reached())
+            //if (car->x>80)
             {
                 i= nepisodes+1;
                 car->y=start.r;
@@ -213,7 +213,7 @@ void CQLearning::q_drive(CCar *car)
 
     qstate current_state=start;
     qstate next_state;
-    while(car->x<80)
+    while(!car->end_reached())
     {
 
         int best_action_index=0;
@@ -231,7 +231,7 @@ void CQLearning::q_drive(CCar *car)
 
         (car->*real_actions[next_state.action])();
         current_state = next_state;
-        usleep(100000);
+        usleep(20000);
     }
 }
 void CQLearning::set_alpha_gamma(double _alpha, double _gamma)
